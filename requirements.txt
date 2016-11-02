@@ -1,0 +1,6 @@
+elasticsearch==2.1.0
+lxml
+nose
+money
+sqlalchemy>=1.0.6
+psycopg2
