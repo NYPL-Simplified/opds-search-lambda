@@ -12,4 +12,7 @@ cd ..
 cd env/lib/python2.7/site-packages
 zip -r9 $zipfile *
 cd ../../../..
+cd env/lib64/python2.7/site-packages
+zip -r9 $zipfile *
+cd ../../../..
 zip -g $zipfile *.py core/* core/**/*
