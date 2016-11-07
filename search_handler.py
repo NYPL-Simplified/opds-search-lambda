@@ -30,7 +30,10 @@ def search_handler(event, context):
             path = input.get('path', '')
             search_url = protocol + '://' + host + path
 
-    query = event.get('queryStringParameters').get("q")
+    query = None
+    queryStringParameters = event.get('queryStringParameters')
+    if queryStringParameters:
+        query = event.get('queryStringParameters').get("q")
     if not query:
         return json.dumps(dict(
             statusCode=200,
