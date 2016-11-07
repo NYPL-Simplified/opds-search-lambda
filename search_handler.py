@@ -1,5 +1,4 @@
 from pdb import set_trace
-import json
 import urllib
 from lxml import etree
 
@@ -35,11 +34,11 @@ def search_handler(event, context):
     if queryStringParameters:
         query = event.get('queryStringParameters').get("q")
     if not query:
-        return json.dumps(dict(
+        return dict(
             statusCode=200,
             headers={},
             body=OpenSearchDocument.for_lane(None, search_url)
-        ))
+        )
 
     integration = Configuration.integration(
         Configuration.ELASTICSEARCH_INTEGRATION)
@@ -62,8 +61,8 @@ def search_handler(event, context):
         entry = fields['opds_entry'][0]
         feed.feed.append(etree.fromstring(entry))
 
-    return json.dumps(dict(
+    return dict(
         statusCode=200,
         headers={},
         body=unicode(feed)
-    ))
+    )
