@@ -15,6 +15,6 @@ cd ../../../..
 if [ -d env/lib64/python2.7/site-packages ]; then
   cd env/lib64/python2.7/site-packages
   zip -r9 $zipfile *
-cd ../../../..
+  cd ../../../..
 fi
 zip -g $zipfile *.py core/* core/*/*
