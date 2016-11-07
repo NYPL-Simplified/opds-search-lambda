@@ -9,6 +9,8 @@ Run `git submodule init && git submodule update` after cloning to initialize cor
 Create a virtual environment in `env` and run `pip install -r requirements.txt` to install dependencies.
 Copy `config.py.sample` to `config.py` and fill in the Elasticsearch url and index to use.
 Run `bin/create_deployment_package <zip_file_name>` to create a zip file to upload to AWS lambda.
+Note: this must be created on amazon linux ec2 instance to work on aws. Run `sudo yum install libxml2-devel libxslt-devel gcc libxslt-python` to set up dependencies.
+
 
 ## License
 
