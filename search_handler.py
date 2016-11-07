@@ -59,4 +59,8 @@ def search_handler(event, context):
         entry = fields['opds_entry'][0]
         feed.feed.append(etree.fromstring(entry))
 
-    return unicode(feed)
+    return json.dumps(dict(
+        statusCode=200,
+        headers={},
+        body=unicode(feed)
+    ))
