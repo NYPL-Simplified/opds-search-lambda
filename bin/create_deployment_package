@@ -1,0 +1,20 @@
+#!/bin/bash
+bindir=`dirname $0`
+if [[ "$1" = /* ]]
+then
+  zipfile=$1
+else
+  zipfile=`pwd`/$1
+fi
+
+cd $bindir
+cd ..
+cd env/lib/python2.7/site-packages
+zip -r9 $zipfile *
+cd ../../../..
+if [ -d env/lib64/python2.7/site-packages ]; then
+  cd env/lib64/python2.7/site-packages
+  zip -r9 $zipfile *
+  cd ../../../..
+fi
+zip -g $zipfile *.py core/* core/*/*

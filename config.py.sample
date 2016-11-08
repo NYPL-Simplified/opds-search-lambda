@@ -1,0 +1,8 @@
+config = {
+    "integrations" : {
+        "Elasticsearch" : {
+            "url": "",
+            "works_index": "",
+        },
+    },
+}
