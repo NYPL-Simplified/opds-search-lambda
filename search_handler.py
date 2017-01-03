@@ -13,24 +13,26 @@ class Configuration(CoreConfiguration):
 
 config = Configuration.load()
 
-
 from core.opensearch import OpenSearchDocument
 from core.util.opds_writer import AtomFeed, OPDSFeed
 from core.external_search import ExternalSearchIndex
 
 def search_handler(event, context):
     search_url = ""
-    input = event.get('input')
-    if input:
-        request_headers = input.get('Headers')
+    if event:
+        request_headers = event.get('headers')
         if request_headers:
             protocol = request_headers.get('X-Forwarded-Proto', '')
             host = request_headers.get('Host', '')
-            path = input.get('path', '')
-            search_url = protocol + '://' + host + path
+            path = event.get('path', '')
+            request_context = event.get("requestContext")
+            if request_context:
+                stage = request_context.get("stage")
+                search_url = protocol + '://' + host + "/" + stage + path
 
     query = None
-    queryStringParameters = event.get('queryStringParameters')
+    if event:
+        queryStringParameters = event.get('queryStringParameters')
     if queryStringParameters:
         query = event.get('queryStringParameters').get("q")
     if not query:
