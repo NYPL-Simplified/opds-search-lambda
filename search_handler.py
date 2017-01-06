@@ -25,10 +25,7 @@ def search_handler(event, context):
             protocol = request_headers.get('X-Forwarded-Proto', '')
             host = request_headers.get('Host', '')
             path = event.get('path', '')
-            request_context = event.get("requestContext")
-            if request_context:
-                stage = request_context.get("stage")
-                search_url = protocol + '://' + host + "/" + stage + path
+            search_url = protocol + '://' + host + path
 
     query = None
     if event:
