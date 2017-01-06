@@ -18,6 +18,12 @@ from core.util.opds_writer import AtomFeed, OPDSFeed
 from core.external_search import ExternalSearchIndex
 
 def search_handler(event, context):
+    cors_headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,OPTIONS',
+        'Access-Control-Allow-Headers': 'Authorization,X-Requested-With',
+    }
+
     search_url = ""
     if event:
         request_headers = event.get('headers')
@@ -35,7 +41,7 @@ def search_handler(event, context):
     if not query:
         return dict(
             statusCode=200,
-            headers={},
+            headers=cors_headers,
             body=OpenSearchDocument.for_lane(None, search_url)
         )
 
@@ -62,6 +68,6 @@ def search_handler(event, context):
 
     return dict(
         statusCode=200,
-        headers={},
+        headers=cors_headers,
         body=unicode(feed)
     )
